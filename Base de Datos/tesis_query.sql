@@ -139,4 +139,34 @@ BEGIN
 	WHERE ima_id = id ;
 END;
 $$ LANGUAGE plpgsql;
+
+/*-------------------------------PARA LOS AUDIOS-----------------------------------------------------------*/
+
+CREATE TABLE audio (
+	au_id	SERIAL PRIMARY KEY,
+	au_nombre text, 
+	au_byte bytea,
+	au_categoria varchar(100),
+	au_respuesta_correcta varchar(100)
+	);
+
+--- Procedimiento que retorna la imagen
+CREATE OR REPLACE FUNCTION retornaAudio(id integer)
+RETURNS TABLE
+  (
+   _id integer,
+   _nombre text,
+   _byte  bytea,
+   _categoria varchar,
+   _respuesta_correcta varchar
+   )
+AS
+$$
+BEGIN
+	RETURN QUERY SELECT
+	au_id,au_nombre,au_byte,au_categoria,au_respuesta_correcta
+	FROM audio
+	WHERE au_id = id ;
+END;
+$$ LANGUAGE plpgsql;
 	

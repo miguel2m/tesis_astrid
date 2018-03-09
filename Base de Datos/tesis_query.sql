@@ -1,4 +1,4 @@
-﻿--DDL
+--DDL
 --Modulo PERSONA
 CREATE TABLE USUARIO (
     us_id		SERIAL PRIMARY KEY,
@@ -53,7 +53,7 @@ BEGIN
 	RETURN QUERY SELECT
 	us_id, us_nombreusuario, us_nombre, us_apellido, us_fechanacimiento,us_genero,us_email, us_password, us_nivel_juego
 	FROM usuario
-	WHERE us_nombreusuario=_nombreusuario AND  us_password = _clave  ;
+	WHERE (us_nombreusuario=_nombreusuario AND  us_password = _clave) OR (us_email = email AND us_password = _clave);
 END;
 $$ LANGUAGE plpgsql;
 
